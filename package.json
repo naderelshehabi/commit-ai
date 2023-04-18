@@ -68,7 +68,7 @@
         },
         "commit-ai.prompt": {
           "type": "string",
-          "default": "Generate a commit message using conventional commit format for the following diff:",
+          "default": "You are an AI pair programmer. You are responsible for creating commit messages using the conventional commit format from the git diff results that I will send you. Start the message with the commit type (e.g. feat, fix, chore). Use ! when there are breaking changes. Then use GitMoji after the commit type. Use the present tense. Lines must not be longer than 72 characters. Generate conventional commit message for the following diff:",
           "description": "Prompt to use when generating commit messages using ChatGPT",
           "editpresentation": "multilineText"
         },
