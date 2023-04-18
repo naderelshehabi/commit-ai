@@ -2,25 +2,86 @@
   "name": "commit-ai",
   "displayName": "Commit AI",
   "description": "A VS Code extension to automate writing conventional commit messages using AI",
+  "publisher": "Nader Elshehabi",
+  "keywords": [
+    "vscode",
+    "extension",
+    "commit",
+    "ai",
+    "chatgpt",
+    "conventional",
+    "commitlint"
+  ],
   "version": "0.0.1",
-  "repository": "https://github.com/naderelshehabi/commit-ai.git",
+  "preview": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/naderelshehabi/commit-ai.git"
+  },
   "author": "Nader Elshehabi",
   "license": "MIT",
   "engines": {
     "vscode": "^1.77.0"
   },
   "categories": [
-    "Other"
+    "Machine Learning"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onView:sourceControl"
+  ],
   "main": "./out/extension.js",
+  "icon": "./images/commit-ai-icon.png",
   "contributes": {
+    "menus": {
+      "scm/title": [
+        {
+          "command": "commit-ai.helloWorld",
+          "group": "navigation",
+          "title": "Generate commit message using ChatGPT",
+          "when": "scmProvider == git"
+        },
+        {
+          "command": "commit-ai.helloWorld",
+          "group": "inline",
+          "title": "Generate commit message using ChatGPT",
+          "when": "scmProvider == git"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "commit-ai.helloWorld",
-        "title": "Hello World"
+        "title": "Hello World",
+        "icon": {
+          "light": "images/commit-ai-light.png",
+          "dark": "images/commit-ai-dark.png"
+        }
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Commit AI",
+      "properties": {
+        "commit-ai.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "ChatGPT API key. Get one at https://platform.openai.com/account/api-keys"
+        },
+        "commit-ai.prompt": {
+          "type": "string",
+          "default": "Generate a commit message using conventional commit format for the following diff:",
+          "description": "Prompt to use when generating commit messages using ChatGPT",
+          "editpresentation": "multilineText"
+        },
+        "commit-ai.ignoredFiles": {
+          "type": "array",
+          "default": [
+            "yarn.lock",
+            "package-lock.json"
+          ],
+          "description": "Files to ignore when generating commit messages using ChatGPT"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",
